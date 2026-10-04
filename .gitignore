@@ -1,0 +1,13 @@
+# Salidas de las corridas (pueden tener datos personales)
+output/
+_to_delete/
+
+# Python
+__pycache__/
+*.pyc
+
+# Exports de Botmaker (pesados; se toman de Metricas_Boti_Mensual)
+config/rules-*.tsv
+
+# Office temporales
+~$*
