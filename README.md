@@ -3,6 +3,13 @@
 > Referencia completa de tablas, reglas y trampas: `C:\GCBA\Documentacion\BOTI_AWS_Referencia.md`.
 > Acá está lo práctico: cómo resolver un pedido nuevo en minutos.
 
+## Estado
+
+- Repo: https://github.com/EdVeralli/Pedidos_Boti (público).
+- Validado: las 57 consultas que generan las recetas parsean con un parser de SQL Trino; ejecución completa simulada (Excel, resúmenes, embudo, `--probar`); `buscar_reglas.py` probado con el TSV real (cp1252).
+- **Pendiente:** primera corrida real de `python pedido.py --probar` contra Athena y ajuste de las recetas que fallen. `pushes_estados` es experimental.
+- Historial del relevamiento y decisiones: `C:\GCBA\Documentacion\BOTI_AWS_Referencia.md` (sección "Estado de este documento").
+
 ## Requisitos (una vez)
 
 - Python 3.10+ (Anaconda) con `boto3`, `awswrangler`, `pandas`, `openpyxl` (los mismos que `Metricas_Boti_Mensual`).
