@@ -1,4 +1,4 @@
--- @descripcion: Sesiones que entran a un trámite con integración y después reciben una regla de error (lógica de boti_vw_v1_problemas_servicios, con el rango pedido).
+-- @descripcion: HEURISTICO (revisar hoja reglas_de_error: no todo error es caida). Sesiones que entran a un trámite con integración y después reciben una regla de error (lógica de boti_vw_v1_problemas_servicios, con el rango pedido).
 -- @costo: medio
 -- @hoja: por_dia
 WITH base AS (
@@ -16,7 +16,7 @@ entrada AS (
 error AS (
   SELECT session_id, MIN(creation_time) AS t_error, MIN_BY(rule_name, creation_time) AS rule_error
   FROM base
-  WHERE regexp_like(lower(rule_name), 'error|servicio ca')
+  WHERE regexp_like(lower(rule_name), 'error|servicio ca') AND NOT regexp_like(lower(rule_name), 'duplicad')
   GROUP BY session_id
 )
 SELECT CAST(e.t_entrada AS DATE) AS fecha, e.rule_entrada, r.rule_error,

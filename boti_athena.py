@@ -156,7 +156,9 @@ class Athena:
         ruta = q['ResultConfiguration']['OutputLocation']
         while True:
             try:
-                df = wr.s3.read_csv(ruta, boto3_session=self.session, dtype=str,
+                # Lista explícita: si se pasa como texto, awswrangler lo toma como PREFIJO
+                # y también lee <id>.csv.metadata (binario) -> filas basura / error 0xFF.
+                df = wr.s3.read_csv([ruta], boto3_session=self.session, dtype=str,
                                     keep_default_na=False, na_values=[''])
                 break
             except Exception as e:

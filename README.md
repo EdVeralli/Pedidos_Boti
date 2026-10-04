@@ -7,7 +7,9 @@
 
 - Repo: https://github.com/EdVeralli/Pedidos_Boti (público).
 - Validado: las 57 consultas que generan las recetas parsean con un parser de SQL Trino; ejecución completa simulada (Excel, resúmenes, embudo, `--probar`); `buscar_reglas.py` probado con el TSV real (cp1252).
-- **Pendiente:** primera corrida real de `python pedido.py --probar` contra Athena y ajuste de las recetas que fallen. `pushes_estados` es experimental.
+- ✅ **04/10/2026: `--probar` contra Athena real, 15/15 recetas OK** (día 02/10/2026, ~5,6 GB escaneados en total). Bug corregido: `wr.s3.read_csv` recibía la ruta como prefijo y leía también el `.csv.metadata` binario (filas basura / error `0xFF`); ahora se pasa como lista.
+- Costos de referencia por 1 día: la mayoría 100–300 MB; `feedback_flujo` y `variables_flujo` ~1,2–1,4 GB (leen vars); `rastreo_persona` ~0,8 GB.
+- `caidas_servicios` es heurístico; `ne_score` no es el D13; `pushes_estados` sigue experimental (no se probó).
 - Historial del relevamiento y decisiones: `C:\GCBA\Documentacion\BOTI_AWS_Referencia.md` (sección "Estado de este documento").
 
 ## Requisitos (una vez)
