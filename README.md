@@ -9,7 +9,7 @@
 - Validado: las 57 consultas que generan las recetas parsean con un parser de SQL Trino; ejecución completa simulada (Excel, resúmenes, embudo, `--probar`); `buscar_reglas.py` probado con el TSV real (cp1252).
 - ✅ **04/10/2026: `--probar` contra Athena real, 15/15 recetas OK** (día 02/10/2026, ~5,6 GB escaneados en total). Bug corregido: `wr.s3.read_csv` recibía la ruta como prefijo y leía también el `.csv.metadata` binario (filas basura / error `0xFF`); ahora se pasa como lista.
 - Costos de referencia por 1 día: la mayoría 100–300 MB; `feedback_flujo` y `variables_flujo` ~1,2–1,4 GB (leen vars); `rastreo_persona` ~0,8 GB.
-- `caidas_servicios` es heurístico; `ne_score` no es el D13; `pushes_estados` sigue experimental (no se probó).
+- `caidas_servicios` es heurístico; `ne_score` no es el D13; `pushes_estados` y `colas` se rehicieron el 04/10 con lo medido en `mapa_pendientes.py` (eventos; la columna `queue` no indica derivación) y falta probarlas.
 - Historial del relevamiento y decisiones: `C:\GCBA\Documentacion\BOTI_AWS_Referencia.md` (sección "Estado de este documento").
 
 ## Requisitos (una vez)
@@ -52,10 +52,10 @@ Cada corrida deja `output\<fecha_hora>_<receta>\` con: `<receta>.xlsx` (una hoja
 | Qué escribió/tocó la gente para llegar a un contenido | `que_escribieron` | `--rulename "SUA01CUX04 Apertura"` |
 | Lo más consultado del período | `top_rulenames` | `python pedido.py top_rulenames --mes 2026-09` (opcional `--rulename "SA%"`) |
 | Resultado de pushes (alcance, sesiones abiertas) | `pushes` | `--rulename "sa01push%"` |
-| Entregadas / leídas / con error por plantilla | `pushes_estados` ($$$) | rango corto: `--dias 3` |
+| Entregadas / leídas / con error por push (embudo desde eventos) | `pushes_estados` ($$$) | rango corto: `--dias 3` · `--rulename "sa01push%"` |
 | Feedback (efectividad, esfuerzo, satisfacción, sugerencias) de un flujo | `feedback_flujo` | `--rulename "%SA01CAT01%"` |
 | Datos que dejó la gente en un flujo (variables) | `variables_flujo` | `--rulename "TUR01CUX06%" --variable fechaturno` |
-| Atención humana / colas | `colas` | `--mes 2026-09` |
+| Atención humana: derivadas por cola (evento `queue-assigned`), atendidas por operador, espera | `colas` ($$$) | rango corto: `--dias 7` · `--canal 5491150500147` |
 | Encontrar las charlas de una persona (área pide por DNI/mail) | `rastreo_persona` | `--texto "12345678|nombre@mail.com" --dias 30` |
 | Cómo respondió el buscador del Boti clásico (one-shots, menús; no es BAX) | `ia_respuestas` | `--mes 2026-09` |
 | No entendidos por score | `ne_score` | `--dias 14` |
@@ -105,7 +105,7 @@ Corre todas las recetas (menos las caras) sobre un día de hace 2 días y deja `
 - Fechas en **UTC** (Argentina = UTC−3). El día en curso no está; el último día cargado está cortado a ~03:00 AR.
 - Sólo desde **05/2024** (tablas `_2`). Lo anterior está en tablas viejas con otra estructura.
 - Sesiones = `COUNT(DISTINCT session_id)`; usuarios = `COUNT(DISTINCT SUBSTR(session_id,1,20))` (confiable sólo en WhatsApp).
-- `boti_event_metrics_2` es carísima (~4 GB por día leyendo todas las columnas): sólo `pushes_estados`, y con rangos cortos.
+- `boti_event_metrics_2` es carísima (~4 GB por día leyendo todas las columnas): sólo `pushes_estados` y `colas`, y con rangos cortos.
 - `feedback_flujo` cuenta `Ni fácil ni difícil` (CATs); CEDETAC no, a propósito: no comparar uno con otro sin aclararlo.
 - `rastreo_persona` trae datos personales: rango corto, no compartir el Excel fuera del área que lo pidió.
 - La columna `tema_botmaker` / `documento_cux` / `activa` se agrega sola cuando el resultado tiene `rule_name` (cruce con el TSV).
