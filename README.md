@@ -57,7 +57,7 @@ Cada corrida deja `output\<fecha_hora>_<receta>\` con: `<receta>.xlsx` (una hoja
 | Datos que dejó la gente en un flujo (variables) | `variables_flujo` | `--rulename "TUR01CUX06%" --variable fechaturno` |
 | Atención humana / colas | `colas` | `--mes 2026-09` |
 | Encontrar las charlas de una persona (área pide por DNI/mail) | `rastreo_persona` | `--texto "12345678|nombre@mail.com" --dias 30` |
-| Cómo respondió la IA (one-shots, menús) | `ia_respuestas` | `--mes 2026-09` |
+| Cómo respondió el buscador del Boti clásico (one-shots, menús; no es BAX) | `ia_respuestas` | `--mes 2026-09` |
 | No entendidos por score | `ne_score` | `--dias 14` |
 | Fallas de integraciones (trámites que terminan en error) | `caidas_servicios` | `--dias 31` |
 | Sesiones sin respuesta del usuario | `sesiones_fantasma` | `--mes 2026-09` |

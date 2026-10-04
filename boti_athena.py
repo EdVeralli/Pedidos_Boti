@@ -197,7 +197,7 @@ def filtro_particion(desde, hasta, alias=''):
     '''
     Filtro por particiones year/month/day (strings sin ceros) para el rango
     [desde, hasta]. En las tablas _2 la partición es la fecha UTC de la sesión;
-    en las de IA, la de ts.
+    en las del buscador del Boti clásico, la de ts.
     '''
     p = _pref(alias)
     partes, d = [], date(desde.year, desde.month, 1)

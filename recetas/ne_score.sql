@@ -1,4 +1,4 @@
--- @descripcion: No entendidos por score insuficiente (max score <= 5.36 en el modelo de IA): por día y mensajes. NO es el D13: otro denominador y no incluye Nada de eso.
+-- @descripcion: No entendidos por score insuficiente (max score <= 5.36 en el buscador del Boti clásico): por día y mensajes. NO es el D13: otro denominador y no incluye Nada de eso.
 -- @costo: bajo
 -- @hoja: por_dia
 WITH b AS (

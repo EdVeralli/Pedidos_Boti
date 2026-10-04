@@ -1,4 +1,4 @@
--- @descripcion: Cómo respondió el modelo de IA: oneShot / oneShotSearch / menú (Original Buttons, Boost), por día.
+-- @descripcion: Cómo respondió el buscador del Boti clásico (no BAX): oneShot / oneShotSearch / menú (Original Buttons, Boost), por día.
 -- @costo: bajo
 -- @hoja: por_dia
 SELECT CAST(ts AS DATE) AS fecha, type, one_shot,
