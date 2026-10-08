@@ -53,6 +53,7 @@ Cada corrida deja `output\<fecha_hora>_<receta>\` con: `<receta>.xlsx` (una hoja
 | Lo más consultado del período | `top_rulenames` | `python pedido.py top_rulenames --mes 2026-09` (opcional `--rulename "SA%"`) |
 | Resultado de pushes (alcance, sesiones abiertas) | `pushes` | `--rulename "sa01push%"` |
 | Entregadas / leídas / con error por push (embudo desde eventos) | `pushes_estados` ($$$) | rango corto: `--dias 3` · `--rulename "sa01push%"` |
+| Cuánta gente **respondió** a una push (por persona, en cualquier sesión; 1 h / 24 h / 72 h) y qué respondió | `push_respuesta` | `--dias 7 --rulename "edu06push02_iel%"` |
 | Feedback (efectividad, esfuerzo, satisfacción, sugerencias) de un flujo | `feedback_flujo` | `--rulename "%SA01CAT01%"` |
 | Datos que dejó la gente en un flujo (variables) | `variables_flujo` | `--rulename "TUR01CUX06%" --variable fechaturno` |
 | Atención humana: derivadas por cola (evento `queue-assigned`), atendidas por operador, espera | `colas` ($$$) | rango corto: `--dias 7` · `--canal 5491150500147` |
@@ -109,3 +110,4 @@ Corre todas las recetas (menos las caras) sobre un día de hace 2 días y deja `
 - `feedback_flujo` cuenta `Ni fácil ni difícil` (CATs); CEDETAC no, a propósito: no comparar uno con otro sin aclararlo.
 - `rastreo_persona` trae datos personales: rango corto, no compartir el Excel fuera del área que lo pidió.
 - La columna `tema_botmaker` / `documento_cux` / `activa` se agrega sola cuando el resultado tiene `rule_name` (cruce con el TSV).
+- **Pushes — interacción:** nunca contar con `original_user_message` (en la fila del `Template` trae lo que la persona hizo *antes*); contar filas `msg_from = 'user'` posteriores a la push y **por persona**, porque la sesión de la push se cierra a la hora y la respuesta tardía abre otra sesión. Los botones de tipo URL del template no dejan rastro en mensajes. Si el pedido nombra un contenido (CUX), no es el nombre de la push: ubicarla con `pushes`. Ejemplo completo: `pedidos\2026-10_push_EDU04CUX21\README.md`.
