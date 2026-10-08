@@ -11,7 +11,7 @@
 - Botones (Botmaker → Notifications Engine → Plantillas → Editar; salir con **Descartar**):
   | Botón | Tipo | Destino |
   |---|---|---|
-  | Inscripción en línea | URL del sitio web | `https://buenosaires.gob.ar/gcaba_historico/educacion/…` → **no queda registrado en Boti** |
+  | Inscripción en línea | URL del sitio web | `https://buenosaires.gob.ar/gcaba_historico/educacion/…` → **no queda registrado en Boti** (ni mensaje ni evento `user-clicked-url`: verificado con `control_click_url.sql`) |
   | Más información | Bloque del bot | `EDU04CUX21 Cross BAX` |
 
 ## Resultado entregado
@@ -27,6 +27,7 @@ Por día (UTC): 05/10 333 · 06/10 40 · 07/10 24 · 08/10 2.
 | Archivo | Para qué |
 |---|---|
 | `push_iel_llegaron_edu04cux21.sql` | **Número final**: personas que llegaron a EDU04CUX21 después de la push (cualquier sesión), por día y por punto de entrada |
+| `control_click_url.sql` | Prueba de que el botón URL no deja registro: eventos `user-clicked-url` de los receptores (1 día, ~18 GB) |
 | `push_edu_interaccion_por_persona.sql` | Respuesta a las 4 pushes de Educación de la semana, por persona (misma sesión / 1 h / 24 h / 72 h). Generalizado como receta `push_respuesta` |
 
 ```powershell
